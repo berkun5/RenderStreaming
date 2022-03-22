@@ -9,7 +9,7 @@ npm run pack
 
 Start Server
 --------------------
-Use Command Prompt, powershell
+Use Command Prompt, powershell\n
 .\webserver.exe -w (local port 80)
 .\webserver -w -p 123 (enter a port "123" in in the example)
 
