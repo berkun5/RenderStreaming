@@ -11,7 +11,8 @@
                     "id": "548e32fd-77d1-40e5-8197-32ca56b41bc0",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Look",
@@ -19,7 +20,8 @@
                     "id": "8ebbde1f-3044-41bc-bdac-430e0eae1a68",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -27,7 +29,8 @@
                     "id": "10fecf58-9483-40e0-ae20-15c8d01a4288",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TogglePause",
@@ -35,7 +38,26 @@
                     "id": "a70a208e-b491-4921-b460-a0144030ef2a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CubeTog",
+                    "type": "Value",
+                    "id": "827ed176-1332-4df6-9e30-b47477f65340",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SendMessageToJs",
+                    "type": "Button",
+                    "id": "a56401cc-3cc7-4878-a076-e0ddf84eb077",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -203,6 +225,28 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ddac02c4-64db-4941-9206-9aa19d6f5c19",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse;Touchscreen;Gamepad",
+                    "action": "CubeTog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f68f5f1-21d8-4838-92e9-d239f13604db",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "SendMessageToJs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -212,11 +256,12 @@
             "actions": [
                 {
                     "name": "Navigate",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "538ffe95-ba92-4acb-84f7-314f6ac8e0a5",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Left Click",
@@ -224,7 +269,8 @@
                     "id": "96c8be88-a7bb-4861-b5e9-956b4208d043",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Point",
@@ -232,7 +278,8 @@
                     "id": "d54e5ff5-4f35-4d2f-a745-95d14aef8c43",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Submit",
@@ -240,7 +287,8 @@
                     "id": "5f571f6a-e9e7-4120-ae3c-79f846bdd202",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -248,7 +296,8 @@
                     "id": "146e681c-77dd-4ff0-9ad5-f4351fea14cc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TogglePause",
@@ -256,7 +305,8 @@
                     "id": "e773b1f9-ce5b-4fa2-9c1f-d194202c43b7",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

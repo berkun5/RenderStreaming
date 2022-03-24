@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Unity.RenderStreaming.Samples
 {
@@ -21,6 +22,11 @@ namespace Unity.RenderStreaming.Samples
         public void OnDisconnect(SignalingEventData eventData)
         {
             Disconnect(eventData.connectionId);
+        }
+        private void asdf()
+        {
+            SignalingEventData sed = new SignalingEventData(FindObjectOfType<EventSystem>());
+            Debug.Log(sed.connectionId);
         }
 
         private void Disconnect(string connectionId)

@@ -6,6 +6,7 @@ namespace Unity.RenderStreaming.Samples
 {
     class PlayerController : MonoBehaviour
     {
+        public GameObject cube;
         [SerializeField] GameObject player;
         [SerializeField] GameObject cameraPivot;
         [SerializeField] InputReceiver playerInput;
@@ -23,7 +24,7 @@ namespace Unity.RenderStreaming.Samples
         Vector2 inputLook;
         Vector3 initialPosition;
         bool inputJump;
-        float cooldownJumpDelta = CooldownJump; 
+        float cooldownJumpDelta = CooldownJump;
 
         protected void Awake()
         {
@@ -31,22 +32,23 @@ namespace Unity.RenderStreaming.Samples
             initialPosition = transform.position;
         }
 
+
         void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
             switch (change)
             {
                 case InputDeviceChange.Added:
-                {
-                    playerInput.PerformPairingWithDevice(device);
-                    CheckPairedDevices();
-                    return;
-                }
+                    {
+                        playerInput.PerformPairingWithDevice(device);
+                        CheckPairedDevices();
+                        return;
+                    }
                 case InputDeviceChange.Removed:
-                {
-                    playerInput.UnpairDevices(device);
-                    CheckPairedDevices();
-                    return;
-                }
+                    {
+                        playerInput.UnpairDevices(device);
+                        CheckPairedDevices();
+                        return;
+                    }
             }
         }
 
@@ -110,6 +112,17 @@ namespace Unity.RenderStreaming.Samples
 
         public void OnDeviceRegained()
         {
+        }
+        public void CubeTog(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+                if (cube.activeInHierarchy)
+                {
+                    cube.SetActive(false);
+                }
+                else { cube.SetActive(true); }
+            }
         }
 
         public void OnMovement(InputAction.CallbackContext value)

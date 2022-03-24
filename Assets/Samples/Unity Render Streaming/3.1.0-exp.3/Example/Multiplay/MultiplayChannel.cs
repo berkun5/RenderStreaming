@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,7 @@ namespace Unity.RenderStreaming.Samples
 {
     enum ActionType
     {
-        ChangeLabel = 0,
+        ChangeLabel = 0
     }
 
     [Serializable]
@@ -20,20 +21,19 @@ namespace Unity.RenderStreaming.Samples
     /// 
     /// </summary>
     [Serializable]
-    class ChangeLabelEvent : UnityEvent<string> {};
+    public class ChangeLabelEvent : UnityEvent<string> { };
 
     /// <summary>
     ///
     /// </summary>
-    class MultiplayChannel : DataChannelBase
+    public class MultiplayChannel : DataChannelBase
     {
         public ChangeLabelEvent OnChangeLabel;
-
         protected override void OnMessage(byte[] bytes)
         {
             string str = System.Text.Encoding.UTF8.GetString(bytes);
             var message = JsonUtility.FromJson<Message>(str);
-            switch(message.type)
+            switch (message.type)
             {
                 case ActionType.ChangeLabel:
                     OnChangeLabel?.Invoke(message.argument);
@@ -49,6 +49,20 @@ namespace Unity.RenderStreaming.Samples
                 argument = text
             };
             Send(JsonUtility.ToJson(msg));
+
         }
+
+        /*public void SendRandomMessage()
+        {
+            string a = "BERKBERKBERK";
+            var msg = new Message
+            {
+                type = ActionType.defo,
+                argument = a
+            };
+            Send(JsonUtility.ToJson(msg));
+            Debug.Log("Sending message to client!");
+        }*/
+
     }
 }
