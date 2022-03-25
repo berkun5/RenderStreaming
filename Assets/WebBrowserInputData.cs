@@ -12,13 +12,14 @@ using UnityEngine.UI;
 public class WebBrowserInputData : MonoBehaviour
 {
     public MultiplayChannel multiplayChannel;
-
-    /*public override void SetChannel(string connectionId, RTCDataChannel channel)
+    public Multiplay multiplay;
+    public InputField inputFMobile, inputFDesktop;
+    private void Awake()
     {
-        this.channel = channel;
-        base.SetChannel(connectionId, channel);
-        Debug.Log("SET CHANNEL: WebBrowserInputData");
-    }*/
+        multiplay = FindObjectOfType<Multiplay>();
+        inputFMobile.onEndEdit.AddListener(delegate { SendData(inputFMobile.text); });
+        inputFDesktop.onEndEdit.AddListener(delegate { SendData(inputFDesktop.text); });
+    }
 
     public void SendData(string msg)
     {
@@ -29,6 +30,7 @@ public class WebBrowserInputData : MonoBehaviour
         multiplayChannel.Channel.Send(msg);
         Debug.Log("ID" + multiplayChannel.Channel.Id);
         Debug.Log("Label" + multiplayChannel.Channel.Label);
+        multiplay.Disconnect(multiplayChannel.connectionID_Temp);
     }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Unity.RenderStreaming.Samples
 {
-    class Multiplay : SignalingHandlerBase,
+    public class Multiplay : SignalingHandlerBase,
         IOfferHandler, IAddChannelHandler, IDisconnectHandler, IDeletedConnectionHandler
     {
         [SerializeField] GameObject prefab;
@@ -29,7 +29,7 @@ namespace Unity.RenderStreaming.Samples
             Debug.Log(sed.connectionId);
         }
 
-        private void Disconnect(string connectionId)
+        public void Disconnect(string connectionId)
         {
             if (!connectionIds.Contains(connectionId))
                 return;
@@ -78,6 +78,10 @@ namespace Unity.RenderStreaming.Samples
             AddChannel(data.connectionId, multiplayChannel);
 
             SendAnswer(data.connectionId);
+
+            //channel.connectionID_Temp = connectionId;
+            multiplayChannel.connectionID_Temp = data.connectionId;
+            Debug.Log("CONNECTIONID " + data.connectionId);
         }
 
         /// todo(kazuki)::

@@ -29,6 +29,7 @@ namespace Unity.RenderStreaming.Samples
     public class MultiplayChannel : DataChannelBase
     {
         public ChangeLabelEvent OnChangeLabel;
+        public string connectionID_Temp;
         protected override void OnMessage(byte[] bytes)
         {
             string str = System.Text.Encoding.UTF8.GetString(bytes);
