@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace Unity.RenderStreaming.Samples
 {
-    class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         public GameObject cube;
+        public RectTransform rect, rect2;
+        public Canvas canvas, canvas2;
         [SerializeField] GameObject player;
         [SerializeField] GameObject cameraPivot;
         [SerializeField] InputReceiver playerInput;
@@ -113,15 +116,20 @@ namespace Unity.RenderStreaming.Samples
         public void OnDeviceRegained()
         {
         }
+
+        Vector2 mousePos;
         public void CubeTog(InputAction.CallbackContext value)
         {
             if (value.performed)
             {
+
+                //IF click position is at right left corner of the screen
                 if (cube.activeInHierarchy)
                 {
                     cube.SetActive(false);
                 }
                 else { cube.SetActive(true); }
+                //mousePos = value.ReadValue<Vector2>();
             }
         }
 
@@ -134,6 +142,7 @@ namespace Unity.RenderStreaming.Samples
         {
             inputLook = value.ReadValue<Vector2>();
         }
+
 
         public void OnJump(InputAction.CallbackContext value)
         {

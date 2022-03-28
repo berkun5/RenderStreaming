@@ -45,7 +45,7 @@
                     "name": "CubeTog",
                     "type": "Value",
                     "id": "827ed176-1332-4df6-9e30-b47477f65340",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -229,7 +229,7 @@
                 {
                     "name": "",
                     "id": "ddac02c4-64db-4941-9206-9aa19d6f5c19",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse;Touchscreen;Gamepad",
