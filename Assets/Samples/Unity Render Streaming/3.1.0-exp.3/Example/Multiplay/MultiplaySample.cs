@@ -28,9 +28,10 @@ namespace Unity.RenderStreaming.Samples
         // Start is called before the first frame update
         void Start()
         {
-            buttonStart.onClick.AddListener(OnClickButtonStart);
+         //   buttonStart.onClick.AddListener(OnClickButtonStart);
             inputFieldUsername.text = UnityEngine.Random.Range(0, 99999).ToString("00000");
             inputFieldUsername.onValueChanged.AddListener(OnValueChangedUserName);
+            OnClickButtonStart(); //this is not default
         }
 
         void OnValueChangedUserName(string value)
@@ -44,24 +45,25 @@ namespace Unity.RenderStreaming.Samples
         {
             var toggles = toggleGroupRole.GetComponentsInChildren<Toggle>();
             var activeToggles = toggleGroupRole.ActiveToggles();
-            var toggle = activeToggles.Any() ? activeToggles.First() : null;
+            var toggle = activeToggles.Any() ? activeToggles.First() : null; 
             var indexRole = Array.FindIndex(toggles, _ => _ == toggle);
-            Role role = (Role)indexRole;
+          //  Role role = (Role)indexRole;
 
             var username = inputFieldUsername.text;
             var connectionId = Guid.NewGuid().ToString();
+            SetUpHost(username);
 
             panel.SetActive(false);
 
-            switch (role)
-            {
-                case Role.Host:
-                    SetUpHost(username);
-                    break;
-                case Role.Guest:
-                    StartCoroutine(SetUpGuest(username, connectionId));
-                    break;
-            }
+          //  switch (role)
+          //  {
+                //case Role.Host:
+                 //   SetUpHost(username);
+                //    break;
+                // case Role.Guest:
+                //     StartCoroutine(SetUpGuest(username, connectionId));
+                //     break;
+          //  }
         }
 
         void SetUpHost(string username)
