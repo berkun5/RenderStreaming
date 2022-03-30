@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
@@ -37,6 +38,15 @@ namespace Unity.RenderStreaming.Samples
 
         void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             switch (change)
             {
                 case InputDeviceChange.Added:
@@ -145,6 +155,7 @@ namespace Unity.RenderStreaming.Samples
 
         public void OnJump(InputAction.CallbackContext value)
         {
+            Debug.Log(value.action.id);
             if (value.performed)
             {
                 inputJump = true;

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using Unity.RenderStreaming.Signaling;
 using UnityEngine;
@@ -25,12 +27,45 @@ namespace Unity.RenderStreaming.Samples
     {
         public static string port;
     }
+    
+    
 
     internal static class RenderStreamingSettings
     {
+        public static string Between(string STR , string FirstString, string LastString)
+        {       
+            string FinalString;     
+            int Pos1 = STR.IndexOf(FirstString) + FirstString.Length;
+            int Pos2 = STR.IndexOf(LastString);
+            FinalString = STR.Substring(Pos1, Pos2 - Pos1);
+            return FinalString;
+        }
+        
+        static string NotepadPath()
+        {
+            string port = null;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo("C:\\Users\\firat\\git\\RenderStreaming\\");
+            FileInfo[] info = directoryInfo.GetFiles("*.txt");
+            info.Select(f => f.FullName);
+
+            string fileName = null;
+            foreach (FileInfo files in info)
+            {
+                if (files.Name.Contains("PORT"))
+                {
+                    fileName = files.ToString();
+                    port = Between(fileName, "T", ".");
+                }
+            }
+            return "localhost:" + port;
+        }
         private static bool s_enableHWCodec = false;
         private static SignalingType s_signalingType = SignalingType.WebSocket;
-        private static string s_signalingAddress = StaticPORT.port; //localhost:6969
+        // private static string s_signalingAddress = StaticPORT.port; //localhost:6969
+
+        private static string s_signalingAddress = NotepadPath();
+        
         private static float s_signalingInterval = 5;
         private static bool s_signalingSecured = false;
 
