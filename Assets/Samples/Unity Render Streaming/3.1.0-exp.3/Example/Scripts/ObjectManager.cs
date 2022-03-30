@@ -17,10 +17,12 @@ public static class ObjectManager
     // private static GameState _gameState;
     public static string exeName;
     public static FileInfo portInfo;
-    
-    public static string Between(string STR , string FirstString, string LastString)
-    {       
-        string FinalString;     
+
+
+    #region NotepadPath
+    public static string Between(string STR, string FirstString, string LastString)
+    {
+        string FinalString;
         int Pos1 = STR.IndexOf(FirstString) + FirstString.Length;
         int Pos2 = STR.IndexOf(LastString);
         FinalString = STR.Substring(Pos1, Pos2 - Pos1);
@@ -47,4 +49,5 @@ public static class ObjectManager
 
         return "PORT" + port;
     }
+    #endregion
 }
