@@ -73,14 +73,14 @@ namespace Unity.RenderStreaming.Samples
             var handler = instance.GetComponent<Multiplay>();
 
             // host player
-            /*
+
             var hostPlayer = GameObject.Instantiate(prefabPlayer);
             var playerController = hostPlayer.GetComponent<PlayerController>();
             playerController.SetLabel(username);
             var playerInput = hostPlayer.GetComponent<InputReceiver>();
             playerInput.PerformPairingWithAllLocalDevices();
             playerController.CheckPairedDevices();
-            */
+
 
             renderStreaming.Run(
                 hardwareEncoder: RenderStreamingSettings.EnableHWCodec,

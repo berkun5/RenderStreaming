@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace Unity.RenderStreaming.Samples
 {
@@ -12,7 +14,7 @@ namespace Unity.RenderStreaming.Samples
 
         [SerializeField] GameObject player;
         [SerializeField] GameObject cameraPivot;
-        [SerializeField] InputReceiver playerInput;
+        [SerializeField] public InputReceiver playerInput;
         [SerializeField] TextMesh label;
         [SerializeField] GameObject captionForMobile;
         [SerializeField] GameObject captionForDesktop;
@@ -33,10 +35,11 @@ namespace Unity.RenderStreaming.Samples
         {
             playerInput.onDeviceChange += OnDeviceChange;
             initialPosition = transform.position;
+            _eventSystem = FindObjectOfType<EventSystem>();
         }
 
 
-        void OnDeviceChange(InputDevice device, InputDeviceChange change)
+        public void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
             try
             {
@@ -71,7 +74,6 @@ namespace Unity.RenderStreaming.Samples
 
             bool hasTouchscreenDevice =
                 playerInput.user.pairedDevices.Count(_ => _.path.Contains("Touchscreen")) > 0;
-
             captionForMobile.SetActive(hasTouchscreenDevice);
             captionForDesktop.SetActive(!hasTouchscreenDevice);
         }
@@ -129,9 +131,9 @@ namespace Unity.RenderStreaming.Samples
         Vector2 mousePos;
         public void CubeTog(InputAction.CallbackContext value)
         {
+
             if (value.performed)
             {
-
                 //IF click position is at right left corner of the screen
                 if (cube.activeInHierarchy)
                 {
@@ -140,6 +142,7 @@ namespace Unity.RenderStreaming.Samples
                 else { cube.SetActive(true); }
                 //mousePos = value.ReadValue<Vector2>();
             }
+            GetRay();
         }
 
         public void OnMovement(InputAction.CallbackContext value)
@@ -156,9 +159,26 @@ namespace Unity.RenderStreaming.Samples
         public void OnJump(InputAction.CallbackContext value)
         {
             Debug.Log(value.action.id);
+            Debug.Log(value.action.GetBindingIndex());
             if (value.performed)
             {
                 inputJump = true;
+            }
+        }
+
+        [SerializeField] private GraphicRaycaster _raycaster;
+        private PointerEventData _pointerEventData;
+        private List<RaycastResult> _results = new List<RaycastResult>();
+        private RaycastResult _raycastResult;
+        private EventSystem _eventSystem;
+        private void GetRay()
+        {
+            _pointerEventData = new PointerEventData(_eventSystem);
+            //_pointerEventData.position = Input.mousePosition;
+            _raycaster.Raycast(_pointerEventData, _results);
+            foreach (RaycastResult raycastRes in _results)
+            {
+                Debug.Log("Raycast Result: " + raycastRes);
             }
         }
     }
