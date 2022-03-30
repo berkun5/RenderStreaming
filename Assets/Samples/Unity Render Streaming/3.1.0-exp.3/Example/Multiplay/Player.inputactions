@@ -229,7 +229,7 @@
                 {
                     "name": "",
                     "id": "ddac02c4-64db-4941-9206-9aa19d6f5c19",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse;Touchscreen;Gamepad",

@@ -32,7 +32,9 @@ public class WebBrowserInputData : MonoBehaviour
         Debug.Log("Label" + multiplayChannel.Channel.Label);
         multiplay.Disconnect(multiplayChannel.connectionID_Temp);
     }
+
 }
+
 
 public class IPData
 {

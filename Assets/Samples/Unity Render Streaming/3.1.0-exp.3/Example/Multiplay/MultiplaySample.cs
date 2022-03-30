@@ -29,6 +29,7 @@ namespace Unity.RenderStreaming.Samples
         void Start()
         {
             buttonStart.onClick.AddListener(OnClickButtonStart);
+            //OnClickButtonStart();
             inputFieldUsername.text = UnityEngine.Random.Range(0, 99999).ToString("00000");
             inputFieldUsername.onValueChanged.AddListener(OnValueChangedUserName);
         }
@@ -72,12 +73,14 @@ namespace Unity.RenderStreaming.Samples
             var handler = instance.GetComponent<Multiplay>();
 
             // host player
+            /*
             var hostPlayer = GameObject.Instantiate(prefabPlayer);
             var playerController = hostPlayer.GetComponent<PlayerController>();
             playerController.SetLabel(username);
             var playerInput = hostPlayer.GetComponent<InputReceiver>();
             playerInput.PerformPairingWithAllLocalDevices();
             playerController.CheckPairedDevices();
+*/
 
             renderStreaming.Run(
                 hardwareEncoder: RenderStreamingSettings.EnableHWCodec,

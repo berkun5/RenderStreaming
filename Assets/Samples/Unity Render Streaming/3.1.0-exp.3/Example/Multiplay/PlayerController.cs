@@ -8,8 +8,7 @@ namespace Unity.RenderStreaming.Samples
     public class PlayerController : MonoBehaviour
     {
         public GameObject cube;
-        public RectTransform rect, rect2;
-        public Canvas canvas, canvas2;
+
         [SerializeField] GameObject player;
         [SerializeField] GameObject cameraPivot;
         [SerializeField] InputReceiver playerInput;
