@@ -89,8 +89,7 @@ public class RemoteInputField : MonoBehaviour
         {
             if (keyboard.backspaceKey.isPressed && textField.text.Length > 0)
             {
-                textField.text.Substring(0, textField.text.Length - 1);
-                textField.caretPosition--;
+                textField.text.Substring(textField.caretPosition);
                 return;
             }
             textField.text += obj;
