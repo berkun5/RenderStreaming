@@ -19,7 +19,7 @@ namespace Unity.RenderStreaming.Samples
         [SerializeField] GameObject captionForMobile;
         [SerializeField] GameObject captionForDesktop;
 
-        [SerializeField] float moveSpeed = 100f;
+        [SerializeField] float moveSpeed = 10f;
         [SerializeField] float rotateSpeed = 10f;
         [SerializeField] float jumpSpeed = 500f;
 
@@ -80,9 +80,34 @@ namespace Unity.RenderStreaming.Samples
 
         private void Update()
         {
-            var forwardDirection = Quaternion.Euler(0, cameraPivot.transform.eulerAngles.y, 0);
-            var moveForward = forwardDirection * new Vector3(inputMovement.x, 0, inputMovement.y);
-            player.GetComponent<Rigidbody>().AddForce(moveForward * Time.deltaTime * moveSpeed);
+            var forwardDirection = Quaternion.Euler(0, player.transform.eulerAngles.y, 0);
+            var moveForward = forwardDirection * new Vector3(0f, 0f, inputMovement.y);
+
+            bool isJumping = player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Jump");
+            
+            Debug.Log(isJumping);
+            if (!isJumping)
+            {
+                player.transform.position += moveForward * moveSpeed * Time.deltaTime;
+            }
+            
+            if (!isJumping && inputMovement.y > .1f && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Run") == false)
+            {
+                player.GetComponent<Animator>().SetTrigger("Run");
+            }
+            else if (!isJumping && Mathf.Approximately(inputMovement.y,0f) && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Run"))
+            {
+                player.GetComponent<Animator>().SetTrigger("Idle");
+            }
+
+            if (inputMovement.x > 0)
+            {
+                player.transform.RotateAround(player.transform.position,new Vector3(0f,inputMovement.x,0f),360f * Time.deltaTime);
+            }
+            else if (inputMovement.x < 0)
+            {
+                player.transform.RotateAround(player.transform.position,new Vector3(0f,inputMovement.x,0f),360f * Time.deltaTime);
+            }
 
             var moveAngles = new Vector3(-inputLook.y, inputLook.x);
             var newAngles = cameraPivot.transform.localEulerAngles + moveAngles * Time.deltaTime * rotateSpeed;
@@ -90,18 +115,21 @@ namespace Unity.RenderStreaming.Samples
 
             if (inputJump && cooldownJumpDelta <= 0.0f)
             {
-                var jumpForward = forwardDirection * new Vector3(0, 1f, 0);
-                player.GetComponent<Rigidbody>().AddForce(jumpForward * jumpSpeed);
-
+                // var jumpForward = forwardDirection * new Vector3(0, 1f, 0);
+                // player.GetComponent<Rigidbody>().AddForce(jumpForward * jumpSpeed);
+                player.GetComponent<Animator>().SetTrigger("Jump");
+                Debug.Log("jumped");
+                isJumping = true;
                 cooldownJumpDelta = CooldownJump;
             }
+
             // jump cooldown
             if (cooldownJumpDelta >= 0.0f)
             {
                 inputJump = false;
+                isJumping = false;
                 cooldownJumpDelta -= Time.deltaTime;
             }
-
 
             // reset if the ball fall down from the floor
             if (player.transform.position.y < -5)
