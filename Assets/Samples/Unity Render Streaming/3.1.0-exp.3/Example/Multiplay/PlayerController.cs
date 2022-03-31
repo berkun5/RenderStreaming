@@ -85,7 +85,6 @@ namespace Unity.RenderStreaming.Samples
 
             bool isJumping = player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Jump");
             
-            Debug.Log(isJumping);
             if (!isJumping)
             {
                 player.transform.position += moveForward * moveSpeed * Time.deltaTime;
@@ -118,7 +117,6 @@ namespace Unity.RenderStreaming.Samples
                 // var jumpForward = forwardDirection * new Vector3(0, 1f, 0);
                 // player.GetComponent<Rigidbody>().AddForce(jumpForward * jumpSpeed);
                 player.GetComponent<Animator>().SetTrigger("Jump");
-                Debug.Log("jumped");
                 isJumping = true;
                 cooldownJumpDelta = CooldownJump;
             }
